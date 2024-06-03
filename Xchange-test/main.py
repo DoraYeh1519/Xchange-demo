@@ -18,13 +18,12 @@ import zipfile
 import os
 import requests
 import json
-from restcountries import RestCountryApiV2 as rapi
 
 # flask setup
 app = Flask(__name__)
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
-UPLOAD_FOLDER = 'static/uploads/'
+UPLOAD_FOLDER = 'static\\uploads\\'  # Escape the backslashes by using double backslashes
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # html setup
@@ -37,7 +36,7 @@ login_manager.login_view = "login"
 
 # CONNECT TO DB
 username = "root" #Your username
-password = "EmeR2023" #Your password
+password = "EmeR1519" #Your password
 host = "localhost"
 port = 3306
 database = "dbms_project" #Your database name
@@ -175,9 +174,10 @@ def register():
             img_file = form.img_url.data
             if img_file and allowed_file(img_file.filename):
                 filename = secure_filename(img_file.filename)
-                print(filename)
+                img_url = os.path.join(app.config['UPLOAD_FOLDER'], filename).replace('\\\\', '\\') 
+                print(img_url)
                 img_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                img_url = filename
+                img_url = os.path.join('..', img_url).replace('\\\\', '\\')
             else:
                 img_url = None
 
@@ -236,6 +236,7 @@ def incoming():
 
                 db.session.commit()
                 session.pop('user_data', None)
+                flash("Registration successful!")
                 return redirect(url_for('login'))
             except Exception as e:
                 db.session.rollback()
@@ -280,6 +281,7 @@ def outgoing():
 
                 db.session.commit()
                 session.pop('user_data', None)
+                flash("Registration successful!")
                 return redirect(url_for('login'))
             except Exception as e:
                 db.session.rollback()

@@ -88,7 +88,7 @@
                 </div>
 
                 <div class="container mt-4">
-                  <div class="row">
+                  <div>
                     <div>
                     <a class="btn btn-primary float-right" href="{{ url_for('like_post', post_id=post.blogpost_id) }}">{{ 'Unlike' if is_like else 'Like' }}</a>
                     </div>
@@ -104,7 +104,7 @@
                                 <img src="{{ comment.user.profile_img_url if comment.user.profile_img_url else '/static/assets/img/default-profile.jpg' }}" alt="Image placeholder">
                               </a>
                               {% else %}
-                                <img src="{{ comment.user.profile_img_url if comment.user.profile_img_url else '/static/assets/img/default-profile.jpg' }}" alt="Image placeholder">
+                                <img src="/static/assets/img/default-profile.jpg" alt="Image placeholder">
                               {% endif %}
                             </div>
                             <div class="comment-body">
