@@ -2075,9 +2075,9 @@ fieldset:disabled a.btn {
   background-color: #DAAA5E;
   border-color: #DAAA5E; }
   .btn-primary:hover {
-    color: #fff;
-    background-color: #0069d9;
-    border-color: #0062cc; }
+    color: #DAAA5E;
+    background-color: #fff;
+    border-color: #DAAA5E; }
   .btn-primary:focus, .btn-primary.focus {
     -webkit-box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
     box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); }
@@ -2088,8 +2088,8 @@ fieldset:disabled a.btn {
   .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
   .show > .btn-primary.dropdown-toggle {
     color: #fff;
-    background-color: #0062cc;
-    border-color: #005cbf; }
+    background-color: #DAAA5E;
+    border-color: #DAAA5E; }
     .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
     .show > .btn-primary.dropdown-toggle:focus {
       -webkit-box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
@@ -8515,7 +8515,7 @@ h1, h2, h3, h4, h5,
     background: #DAAA5E;
     border: 1px solid #DAAA5E;
     color: #fff; }
-    .btn.btn-primary:hover, .btn.btn-primary:focus, .btn.btn-primary:active{
+    .btn.btn-primary:hover {
       border: 1px solid #DAAA5E;
       background: transparent;
       color: #DAAA5E; }

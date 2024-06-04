@@ -36,7 +36,7 @@ login_manager.login_view = "login"
 
 # CONNECT TO DB
 username = "root" #Your username
-password = "EmeR1519" #Your password
+password = "EmeR2023" #Your password
 host = "localhost"
 port = 3306
 database = "dbms_project" #Your database name
@@ -66,7 +66,6 @@ class BlogPost(db.Model):
     views = db.Column(db.Integer, default=0, nullable=False)
     author_id = db.Column(db.String(250),db.ForeignKey('user.user_id'), nullable=False)
     img_url = db.Column(db.String(1000), nullable=False)
-    img_folder = db.Column(db.String(1000), nullable=True)
     likes = db.Column(db.Text, nullable=False)
     comments = db.relationship("Comment",backref="post",cascade='all, delete')
     reacts = db.relationship("React", backref="post",cascade='all, delete')
@@ -389,19 +388,6 @@ def show_post(post_id):
     comments = Comment.query.filter_by(post_id=post_id).order_by(Comment.comment_id.desc()).all()
     image_files = []
 
-    if requested_post.img_folder:
-        img_folder_path = requested_post.img_folder
-        # Get list of directory names (gallery names) in the img_folder_path
-        gallery_names = os.listdir(img_folder_path)
-
-        # Iterate over each gallery and get the list of filenames within each gallery
-        for gallery_name in gallery_names:
-            gallery_path = os.path.join(img_folder_path, gallery_name)
-            if os.path.isdir(gallery_path):
-                filenames = os.listdir(gallery_path)
-                # Extend the image_files list with filenames within this gallery
-                image_files.extend(filenames)
-
     return render_template("post.html", post=requested_post, form=form,
                            all_comments=comments, image_files=image_files, post_id=str(post_id), is_author = is_post_author(post_id),
                            tagged_users = tagged_users_data, is_like=is_like, all_posts=popular_posts)
@@ -429,36 +415,12 @@ def add_new_post():
     form = CreatePostForm()
     if form.validate_on_submit():
         # Save uploaded folder to server
-        images_folder = form.images_folder.data
-        if images_folder:
-            # Ensure that the uploaded file has a valid extension
-            if not allowed_file(images_folder.filename):
-                flash("File does not have an approved extension.")
-                return redirect(url_for("add_new_post"))
-
-            folder_path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(images_folder.filename))
-            images_folder.save(folder_path)
-            # Extract the uploaded zip file
-            extract_folder = os.path.join(app.config['UPLOAD_FOLDER'], 'extracted')
-            os.makedirs(extract_folder, exist_ok=True)  # Create folder if not exists
-            try:
-                with zipfile.ZipFile(folder_path, 'r') as zip_ref:
-                    zip_ref.extractall(extract_folder)
-            except zipfile.BadZipFile:
-                flash('Error: Uploaded file is not a valid zip file.')
-                os.remove(folder_path)  # Remove the uploaded zip file
-                return redirect(url_for("add_new_post"))
-            image_files = os.listdir(extract_folder)
-        else:
-            extract_folder = None
-            image_files = []
 
         new_post = BlogPost(
             title=form.title.data,
             upload_date=date.today().strftime("%B %d, %Y"),
             body=form.body.data,
             img_url=form.img_url.data,
-            img_folder=extract_folder,  # Set the extracted folder path
             author_id=current_user.user_id,
             views=0,
             likes=0
@@ -520,7 +482,6 @@ def edit_post(post_id):
         post.title = edit_form.title.data
         post.img_url = edit_form.img_url.data
         post.author_id = current_user.user_id
-        post.img_folder = extract_folder
         post.body = edit_form.body.data
 
         db.session.commit()

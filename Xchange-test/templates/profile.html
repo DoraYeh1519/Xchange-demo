@@ -115,7 +115,7 @@
   <!-- Page Header -->
 <div id="colorlib-main">
   <section class="ftco-section ftco-no-pt ftco-no-pb">
-    <header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/img/' + (user.profile_img_url if user.profile_img_url else 'login-bg.jpg'))}}')">
+    <header class="masthead" style="background-image: url('../static/assets/img/register-bg.jpg')" >
       <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-md-10 col-lg-8 col-xl-7">
@@ -132,33 +132,91 @@
       <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <!-- Left Column (Post Content) -->
-          <div class="col-md-8">
+          <div class="col-md-10">
             <article class="main-content">
               <div class="container">
-                <div class="row justify-content-center">
+                <div class="row content-center">
                   <div class="col-md-10 col-lg-12 col-xl-9">
                     <div class="user-info">
                       {% if user_student_type == 'International Student' %}
-                      <ul>
+                      <div class="row">
+                        <div class="col-4 text-center">
+                          <img src="{{ user.profile_img_url if user.profile_img_url else '/static/assets/img/default-profile.jpg' }}" class="img-fluid rounded-circle" alt="User Avatar">
+                        </div>
+                        <div class="col-8">
+                          <div class="row">
+                            <div class="col-4"><strong>Name:</strong></div>
+                            <div class="col-8"> {{ user.user_name }} </div>
+                          </div> 
+                          <div class="row"> 
+                            <div class="col-4"><strong>Email:</strong></div>
+                              <div class="col-8"><a href="mailto:{{ user.email }}" class="link-dark">{{ user.email }}</a></div>
+                          </div> 
+                          <div class="row"> 
+                            <div class="col-4"><strong>Studying:</strong> </div> 
+                            <div class="col-8"> {{ detailed_info.origin_school }} </div> 
+                          </div>
+                          <div class="row">
+                            <div class="col-4"><strong>From:</strong></div> 
+                            <div class="col-8"> {{ detailed_info.region }}, {{ detailed_info.country }} </div> 
+                          </div> 
+                          <div class="row"> 
+                            <div class="col-4"> <strong>Info:</strong> </div> 
+                            <div class="col-8"> <p>{{ detailed_info.info }}</p> </div> 
+                          </div> 
+                        </div> 
+                      </div>
+                      <!-- <ul>
                         <li><strong>Name:</strong> {{ user.user_name }}</li>
                         <li><strong>Email:</strong> <a href="mailto:{{ user.email }}" class="link-dark">{{ user.email }}</a></li>
                         <li><strong>Studying:</strong> {{ detailed_info.origin_school }}</li>
-                        <li><strong>From:</strong> {{ detailed_info.country }}, {{ detailed_info.region }}</li>
-                        <li><strong>Info:</strong> {{ detailed_info.info }}</li>
-                      </ul>
+                        <li><strong>From:</strong> {{ detailed_info.region }}, {{ detailed_info.country }}</li>
+                        <li><strong>Info:</strong><p>{{ detailed_info.info }}</p></li>
+                      </ul> -->
                       {% elif user_student_type == 'Taiwanese Student' %}
-                      <ul>
-                        <li><strong>Name:</strong> {{ user.user_name }}</li>
-                        <li><strong>Email:</strong> <a href="mailto:{{ user.email }}" class="link-dark">{{ user.email }}</a></li>
-                        <li><strong>Studying:</strong> {{ detailed_info.exchanging_school }}</li>
-                        <li><strong>In:</strong> {{ detailed_info.country }}, {{ detailed_info.region }}</li>
-                        <li><strong>Info:</strong> {{ detailed_info.info }}</li>
-                      </ul>
+                      <div class="row">
+                        <div class="col-4 text-center">
+                          <img src="{{ user.profile_img_url if user.profile_img_url else '/static/assets/img/default-profile.jpg' }}" class="img-fluid rounded-circle" alt="User Avatar">
+                        </div>
+                        <div class="col-8">
+                          <div class="row">
+                            <div class="col-4"><strong>Name:</strong></div>
+                            <div class="col-8"> {{ user.user_name }} </div>
+                          </div> 
+                          <div class="row"> 
+                            <div class="col-4"><strong>Email:</strong></div>
+                              <div class="col-8"><a href="mailto:{{ user.email }}" class="link-dark">{{ user.email }}</a></div>
+                          </div> 
+                          <div class="row"> 
+                            <div class="col-4"><strong>Studying:</strong> </div> 
+                            <div class="col-8"> {{ detailed_info.exchanging_school }} </div> 
+                          </div>
+                          <div class="row">
+                            <div class="col-4"><strong>In:</strong></div> 
+                            <div class="col-8"> {{ detailed_info.region }}, {{ detailed_info.country }} </div> 
+                          </div> 
+                          <div class="row"> 
+                            <div class="col-4"> <strong>Info:</strong> </div> 
+                            <div class="col-8"> <p>{{ detailed_info.info }}</p> </div> 
+                          </div> 
+                        </div> 
+                      </div>
                       {% else %}
-                      <ul>
-                        <li><strong>Name:</strong> {{ user.user_name }}</li>
-                        <li><strong>Info:</strong> {{ detailed_info.info }}</li>
-                      </ul>
+                      <div class="row">
+                        <div class="col-4 text-center">
+                          <img src="{{ user.profile_img_url if user.profile_img_url else '/static/assets/img/default-profile.jpg' }}" class="img-fluid rounded-circle" alt="User Avatar">
+                        </div>
+                        <div class="col-8">
+                          <div class="row">
+                            <div class="col-4"><strong>Name:</strong></div>
+                            <div class="col-8"> {{ user.user_name }} </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-4"><strong>Info:</strong></div>
+                            <div class="col-8"> {{ detailed_info.info }} </div>
+                          </div>
+                        </div>
+                      </div>
                       {% endif %}
                       {% if is_profile_user and user_student_type != 'Xchange'%}
                       <div class="d-flex justify-content-center mb-4">
@@ -183,7 +241,7 @@
               {% if post.author_id == user.user_id %}
                 <div class="col-md-6">
                   <div class="blog-entry ftco-animate d-md-flex align-items-center">
-                    <img src="{{ post.img_url }}" alt="Thumbnail Image" class="img img-2 popup-vimeo d-flex align-items-center justify-content-center" style="object-fit: cover;">
+                    <img src="{{ post.img_url if post.img_url else '../static/images/image_{num}.jpg'.format( num=range(1, 12) | random) }}" alt="Thumbnail Image" class="img img-2 popup-vimeo d-flex align-items-center justify-content-center" style="object-fit: cover;">
                     <div class="text text-2 p-4">
                       <h3 class="mb-2"><a href="{{ url_for('show_post', post_id=post.blogpost_id) }}">{{ post.title }}</a></h3>
                       <div class="meta-wrap">
@@ -212,7 +270,7 @@
               {% for post in tagged_posts %}
                 <div class="col-md-6">
                   <div class="blog-entry ftco-animate d-md-flex align-items-center">
-                    <img src="{{ post.img_url }}" alt="Thumbnail Image" class="img img-2 popup-vimeo d-flex align-items-center justify-content-center" style="object-fit: cover;">
+                    <img src="{{ post.img_url if post.img_url else '../static/images/image_{num}.jpg'.format( num=range(1, 12) | random) }}" alt="Thumbnail Image" class="img img-2 popup-vimeo d-flex align-items-center justify-content-center" style="object-fit: cover;">
                     <div class="text text-2 p-4">
                       <h3 class="mb-2"><a href="{{ url_for('show_post', post_id=post.blogpost_id) }}">{{ post.title }}</a></h3>
                       <div class="meta-wrap">

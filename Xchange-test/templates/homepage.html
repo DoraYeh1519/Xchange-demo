@@ -38,7 +38,7 @@
             {% if post.blogpost_id % 4 == 1 or post.blogpost_id % 4 == 0 %}
               <div class="col-md-6">
                 <div class="blog-entry ftco-animate d-md-flex align-items-center">
-                  <img src="{{ post.img_url }}" alt="Thumbnail Image" class="img img-2 popup-vimeo d-flex align-items-center justify-content-center" style="object-fit: cover;">
+                  <img src="{{ post.img_url if post.img_url else '../static/images/image_{num}.jpg'.format( num=range(1, 12) | random) }}" alt="Thumbnail Image" class="img img-2 popup-vimeo d-flex align-items-center justify-content-center" style="object-fit: cover;">
                   <div class="text text-2 p-4">
                     <h3 class="mb-2"><a href="{{ url_for('show_post', post_id=post.blogpost_id) }}">{{post.title}}</a></h3>
                     <div class="meta-wrap">
