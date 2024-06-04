@@ -8515,7 +8515,7 @@ h1, h2, h3, h4, h5,
     background: #DAAA5E;
     border: 1px solid #DAAA5E;
     color: #fff; }
-    .btn.btn-primary:hover {
+    .btn.btn-primary:hover, .btn.btn-primary:focus, .btn.btn-primary:active{
       border: 1px solid #DAAA5E;
       background: transparent;
       color: #DAAA5E; }

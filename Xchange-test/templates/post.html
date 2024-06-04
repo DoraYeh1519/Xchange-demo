@@ -79,8 +79,8 @@
                       <div class="about-author p-4 bg-light">
                         <h3><b>Author Information</b></h3>
                         <div class="row mb-4">
-                          <img src="{{ post.author.profile_img_url if post.author.profile_img_url else '/static/assets/img/default-profile.jpg' }}" alt="Image placeholder" class="img-fluid max-size-pf">
-                          <h3><a href="{{url_for('profile', user_id = post.author.user_id)}}" class="link-dark">{{ post.author.user_name }}</a></h3>
+                          <img src="{{ post.author.profile_img_url if post.author.profile_img_url else '/static/assets/img/default-profile.jpg' }}" alt="Image placeholder" class="img-fluid max-size-pf mx-2">
+                          <h3 class=" mx-1"><a href="{{url_for('profile', user_id = post.author.user_id)}}" class="link-dark">{{ post.author.user_name }}</a></h3>
                         </div>
                       </div>
                     </div>
@@ -89,12 +89,10 @@
 
                 <div class="container mt-4">
                   <div>
-                    <div>
-                    <a class="btn btn-primary float-right" href="{{ url_for('like_post', post_id=post.blogpost_id) }}">{{ 'Unlike' if is_like else 'Like' }}</a>
-                    </div>
-
+                    <a class="btn btn-primary {{'btn-outline-primary' if is_like}} float-right"  href="{{ url_for('like_post', post_id=post.blogpost_id) }}">{{ 'Unlike' if is_like else 'Like' }}</a>
+                    <h4 class="mb-5 font-weight-bold float-right mx-3">{{post.likes}} Likes</h4>
+                    <h4 class="mb-5 font-weight-bold">{{ all_comments|length }} Comments</h4>
                     <div class="pt-5 mt-5">
-                      <h4 class="mb-5 font-weight-bold">{{ all_comments|length }} Comments</h3>
                         <ul class="comment-list">
                         {% for comment in all_comments %}
                           <li class="comment">
@@ -114,9 +112,9 @@
                               <span class="sub-text"><a href="{{url_for('profile', user_id = comment.user.user_id)}}" class="link-dark">{{comment.user_id}}</a> <a href="{{url_for('profile', user_id = comment.user.user_id)}}" class="link-dark">{{comment.user.user_name}}</a></span>
                               {% endif %}
                               {% if is_author or comment.user_id == current_user.get_id() %}
-                              <a href="#" class="link-dark" onclick="confirmDeleteComment('{{ comment.comment }}', '{{ comment.user.user_name if not comment.anonymous else 'Anonymous'}}', '{{ comment.comment_time }}', '{{ url_for('delete_comment', comment_id=comment.comment_id, post_id=post.blogpost_id) }}')">✘</a>
+                              <a class="link-dark" href="#" onclick="confirmDeleteComment('{{ comment.comment | replace("'", "\\'") }}', '{{ comment.user.user_name if not comment.anonymous else 'Anonymous' }}', '{{ comment.comment_time }}', '{{ url_for('delete_comment', comment_id=comment.comment_id, post_id=post.blogpost_id) }}')">✘</a>
                               {% endif %}
-                              <p>{{comment.comment}}</p>
+                              <h5>{{comment.comment}}</h5>
                               <span class="date sub-text">{{comment.comment_time}}</span>
                             </div>
                           </li>

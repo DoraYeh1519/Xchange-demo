@@ -67,6 +67,7 @@ class BlogPost(db.Model):
     author_id = db.Column(db.String(250),db.ForeignKey('user.user_id'), nullable=False)
     img_url = db.Column(db.String(1000), nullable=False)
     img_folder = db.Column(db.String(1000), nullable=True)
+    likes = db.Column(db.Text, nullable=False)
     comments = db.relationship("Comment",backref="post",cascade='all, delete')
     reacts = db.relationship("React", backref="post",cascade='all, delete')
     tagged = db.relationship("Tagged_user", backref="post",cascade='all, delete')
@@ -337,7 +338,7 @@ def get_all_posts():
     if session.get('info'):
         result = db.session.execute(db.select(BlogPost).filter_by(author_id = 1))
     else:
-        result = db.session.execute(db.select(BlogPost).order_by(desc(BlogPost.views)))
+        result = db.session.execute(db.select(BlogPost).order_by(desc(BlogPost.likes), desc(BlogPost.upload_date)))
 
     all_posts = result.scalars().all()
     session.pop('info', None)
@@ -410,12 +411,15 @@ def like_post(post_id):
     if not current_user.is_authenticated:
         flash("You need to login to like a post.")
         return redirect(url_for("show_post", post_id=post_id))
+    post = BlogPost.query.filter_by(blogpost_id=post_id).first()
     like = React.query.filter_by(user_id=current_user.user_id, post_id=post_id).first()
     if not like:
         new_like = React(user_id=current_user.user_id, post_id=post_id)
         db.session.add(new_like)
+        post.likes += 1
     else:
         db.session.delete(like)
+        post.likes -= 1
     db.session.commit()
     return redirect(url_for("show_post", post_id=post_id))
 
@@ -456,7 +460,8 @@ def add_new_post():
             img_url=form.img_url.data,
             img_folder=extract_folder,  # Set the extracted folder path
             author_id=current_user.user_id,
-            views=0
+            views=0,
+            likes=0
         )
         db.session.add(new_post)
         db.session.commit()
@@ -534,7 +539,7 @@ def edit_post(post_id):
 
     return render_template("make-post.html", form=edit_form, post=post, is_edit=True, tagged_users_data=tagged_users_data)
 
-@app.route("/delete/<int:post_id>")
+@app.route("/delete_post/<int:post_id>")
 def delete_post(post_id):
     if not is_post_author(post_id):
         flash("You are not the author of this post.", "danger")
@@ -545,7 +550,7 @@ def delete_post(post_id):
     return redirect(url_for('get_all_posts'))
 
 
-@app.route("/delete/<int:comment_id>/<int:post_id>")
+@app.route("/delete_comment/<int:comment_id>/<int:post_id>")
 def delete_comment(comment_id, post_id):
     comment_to_delete = db.get_or_404(Comment, comment_id)
     db.session.delete(comment_to_delete)
