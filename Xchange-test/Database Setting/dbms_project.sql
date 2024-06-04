@@ -29,12 +29,12 @@ CREATE TABLE `blogpost` (
   `body` text,
   `views` int NOT NULL DEFAULT '0',
   `author_id` int NOT NULL,
-  `img_url` varchar(45) DEFAULT NULL,
-  `img_folder` varchar(45) DEFAULT NULL,
+  `img_url` varchar(1000) DEFAULT NULL,
+  `likes` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`blogpost_id`,`author_id`),
   KEY `author_idx` (`author_id`),
   CONSTRAINT `author_id` FOREIGN KEY (`author_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `blogpost` (
 
 LOCK TABLES `blogpost` WRITE;
 /*!40000 ALTER TABLE `blogpost` DISABLE KEYS */;
-INSERT INTO `blogpost` VALUES (9,'Our First Post!','May 31, 2024','<p>To make sure the home page works well, this post is needed</p>\r\n',1,1,'',NULL);
+INSERT INTO `blogpost` VALUES (12,'Our First Post!','June 03, 2024','<p><strong>Welcome to Xchange !!!</strong></p>\r\n\r\n<p>This is a platform for exchange students to communicate with each other.</p>\r\n\r\n<p>We will provide more information about the exchange or platform in this account, please stay tuned!</p>\r\n\r\n<p><strong><a href=\"https://www.google.com/url?sa=i&amp;url=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fcoming-soon&amp;psig=AOvVaw2QGgTz9M8_2Wd0ce2zY34i&amp;ust=1717601917505000&amp;source=images&amp;cd=vfe&amp;opi=89978449&amp;ved=0CBIQjRxqFwoTCJDIkuOjwoYDFQAAAAAdAAAAABAI\"><img alt=\"\" src=\"https://img.freepik.com/free-vector/abstract-coming-soon-halftone-style-background-design_1017-27282.jpg\" style=\"height:300px; width:450px\" /></a></strong></p>\r\n',64,1,'https://img.freepik.com/free-photo/energetic-dance-floor-with-people-celebrating-birthday_1268-30665.jpg?size=626&ext=jpg&ga=GA1.1.1518270500.1717372800&semt=sph',1),(14,'Hi','June 03, 2024','<p>Hello</p>\r\n',79,111306000,'https://i.etsystatic.com/29488153/r/il/e0f22b/3860244894/il_fullxfull.3860244894_p9az.jpg',0),(15,'This is my new posts!','June 04, 2024','<p>This is my first post with my friend!</p>\r\n',34,111306120,'https://images.unsplash.com/photo-1715509790057-a44470a63cc2?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',0),(16,'Introduction of OIC!','June 04, 2024','<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Internationalization has been one of the endeavors of National Chengchi University (NCCU). As a result, the Center of International Education and Exchange (IEE) was established in 2004, which later became the Office of International Cooperation (OIC). Under the leadership of the first director of the Center, Dr. Yeh-Yun Lin, numerous goals were set, which included increasing the quantity and quality of English-taught courses and programs at NCCU, creating an international learning environment, and expanding international student and faculty exchange.</p>\r\n\r\n<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In 2006, Dr. Shu-Heng Chen took over the leadership of IEE. Under his guidance and management, IEE/OIC has continued to carry forward and enhance the goals and ideals of globalization. In 2012/2013 academic year, the total numbers of NCCU&rsquo;s university level partners have been increased to over 260, the total numbers of incoming and outgoing exchange students have been increased to 1,000 each year, and there are over 500 degree seeking international students at NCCU.</p>\r\n\r\n<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In order to receive and manage the large number of international students, extensive efforts have been developed to create an &nbsp;international environment, e.g. the establishment of over 600 English taught courses, Chinese language teaching, numerous social, cultural, and academic activities to service foreign students. In addition, OIC has initiated programs to encourage Faculty Ambassador and Faculty/Researcher Exchange.</p>\r\n\r\n<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;What&rsquo;s driven the OIC leader and staff to initiate and continue to develop this endeavor is the strong sense of vision and mission - to benefit students and faculty to expand their global academic and cultural horizon, and to provide opportunities for them to be trained as valuable social leaders and global citizens. The numbers of exchange activities may continue to vary, but the unity of vision and mission will never waiver.</p>\r\n',3,1,'https://yt3.googleusercontent.com/AMHUUNI2DntbSJXUtWfB18Yu0KsFDw7jsgq07QBaI_q-oIR8JmKv_rsDRb5OVfxMD5Zff-CJ=s900-c-k-c0x00ffffff-no-rj',0);
 /*!40000 ALTER TABLE `blogpost` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,12 +60,13 @@ CREATE TABLE `comment` (
   `post_id` int NOT NULL,
   `comment_time` varchar(250) DEFAULT NULL,
   `comment` text,
+  `anonymous` tinyint NOT NULL,
   PRIMARY KEY (`comment_id`,`user_id`,`post_id`),
   KEY `cUser_id_idx` (`user_id`),
   KEY `cBlog_id_idx` (`post_id`),
   CONSTRAINT `Cpost_id` FOREIGN KEY (`post_id`) REFERENCES `blogpost` (`blogpost_id`),
   CONSTRAINT `Cuser_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,6 +127,7 @@ CREATE TABLE `incoming_user` (
 
 LOCK TABLES `incoming_user` WRITE;
 /*!40000 ALTER TABLE `incoming_user` DISABLE KEYS */;
+INSERT INTO `incoming_user` VALUES (111306120,'UCLA','americas','USA','NewYork','Hey');
 /*!40000 ALTER TABLE `incoming_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,6 +179,7 @@ CREATE TABLE `outgoing_user` (
 
 LOCK TABLES `outgoing_user` WRITE;
 /*!40000 ALTER TABLE `outgoing_user` DISABLE KEYS */;
+INSERT INTO `outgoing_user` VALUES (111306000,'NCCU','asia','Taiwan','Taipei','Welcome to my profile!');
 /*!40000 ALTER TABLE `outgoing_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,6 +233,7 @@ CREATE TABLE `react` (
 
 LOCK TABLES `react` WRITE;
 /*!40000 ALTER TABLE `react` DISABLE KEYS */;
+INSERT INTO `react` VALUES (1,12);
 /*!40000 ALTER TABLE `react` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -256,7 +260,7 @@ CREATE TABLE `tagged_user` (
 
 LOCK TABLES `tagged_user` WRITE;
 /*!40000 ALTER TABLE `tagged_user` DISABLE KEYS */;
-INSERT INTO `tagged_user` VALUES (1,9);
+INSERT INTO `tagged_user` VALUES (1,12),(111306000,14),(111306000,15);
 /*!40000 ALTER TABLE `tagged_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,7 +288,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Xchange Official','dorayeh011093@gmail.com','pbkdf2:sha256:600000$1e2Kgps2$48b1d9accb5674b9010a3549a3aeccbe58d204c59ab972616c856589b8d45b18',NULL);
+INSERT INTO `user` VALUES (1,'Xchange Official','dorayeh011093@gmail.com','pbkdf2:sha256:600000$1e2Kgps2$48b1d9accb5674b9010a3549a3aeccbe58d204c59ab972616c856589b8d45b18','..\\static\\uploads\\depositphotos_320055112-stock-illustration-x-icon-vector-illustration-design.jpg'),(111306000,'王曉明','321@gmail.com','pbkdf2:sha256:600000$7SrQFYxo$155ee01afeef08dfb55d9fbee7c60f625a93fe88857a875935006e8e80068495','..\\static\\uploads\\depositphotos_20077545-stock-illustration-stick-man-cartoon.jpg'),(111306120,'林一二','012@gmail.com','pbkdf2:sha256:600000$hpB9y1Om$ca4232f29691eaa54a450e9425fe1f918501f028371569f8fa685b00faaedc97',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -297,4 +301,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-31  3:58:49
+-- Dump completed on 2024-06-05  1:05:18
