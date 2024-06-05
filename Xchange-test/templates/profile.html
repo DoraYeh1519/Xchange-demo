@@ -185,7 +185,7 @@
                           </div> 
                           <div class="row"> 
                             <div class="col-4"><strong>Email:</strong></div>
-                              <div class="col-8"><a href="mailto:{{ user.email }}" class="link-dark">{{ user.email }}</a></div>
+                              <div class="col-8"><a href="mailto:{{ user.email }}" class="link-light">{{ user.email }}</a></div>
                           </div> 
                           <div class="row"> 
                             <div class="col-4"><strong>Studying:</strong> </div> 
@@ -218,14 +218,14 @@
                         </div>
                       </div>
                       {% endif %}
-                      {% if is_profile_user and user_student_type != 'Xchange'%}
-                      <div class="d-flex justify-content-center mb-4">
-                        <a class="btn btn-primary float-right" href="{{url_for('edit_profile', user_id=user.user_id)}}">Edit Profile</a>
-                      </div>
-                      {% endif %}
                     </div>
                   </div>
                 </div>
+                {% if is_profile_user and user_student_type != 'Xchange'%}
+                <div class="content-center mb-5">
+                  <a class="btn btn-primary float-right" href="{{url_for('edit_profile', user_id=user.user_id)}}">Edit Profile</a>
+                </div>
+                {% endif %}
               </div>
             </article>
           </div>
@@ -243,14 +243,14 @@
                   <div class="blog-entry ftco-animate d-md-flex align-items-center">
                     <img src="{{ post.img_url if post.img_url else '../static/images/image_{num}.jpg'.format( num=range(1, 12) | random) }}" alt="Thumbnail Image" class="img img-2 popup-vimeo d-flex align-items-center justify-content-center" style="object-fit: cover;">
                     <div class="text text-2 p-4">
-                      <h3 class="mb-2"><a href="{{ url_for('show_post', post_id=post.blogpost_id) }}">{{ post.title }}</a></h3>
+                      <h3 class="mb-2"><a href="{{ url_for('show_post', post_id=post.blogpost_id) }}" class="link-dark">{{ post.title }}</a></h3>
                       <div class="meta-wrap">
                         <p class="meta">
                           <span><i class="icon-calendar mr-2"></i>{{ post.upload_date }}</span>
                           <span><a href="single.html"><i class="icon-folder-o mr-2"></i>By {{ post.author.user_name }}</a></span>
                           <span><i class="icon-comment2 mr-2"></i>{{ post.views }} Views</span>
                         </p>
-                        <p><a href="{{ url_for('show_post', post_id=post.blogpost_id) }}" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
+                        <p><a href="{{ url_for('show_post', post_id=post.blogpost_id) }}" class="btn-custom link-light">Read More <span class="ion-ios-arrow-forward"></span></a></p>
                       </div>
                     </div>
                   </div>
@@ -272,14 +272,14 @@
                   <div class="blog-entry ftco-animate d-md-flex align-items-center">
                     <img src="{{ post.img_url if post.img_url else '../static/images/image_{num}.jpg'.format( num=range(1, 12) | random) }}" alt="Thumbnail Image" class="img img-2 popup-vimeo d-flex align-items-center justify-content-center" style="object-fit: cover;">
                     <div class="text text-2 p-4">
-                      <h3 class="mb-2"><a href="{{ url_for('show_post', post_id=post.blogpost_id) }}">{{ post.title }}</a></h3>
+                      <h3 class="mb-2"><a href="{{ url_for('show_post', post_id=post.blogpost_id) }}" class="link-dark">{{ post.title }}</a></h3>
                       <div class="meta-wrap">
                         <p class="meta">
                           <span><i class="icon-calendar mr-2"></i>{{ post.upload_date }}</span>
                           <span><a href="{{ url_for('profile', user_id=post.author_id) }}"><i class="icon-folder-o mr-2"></i>By {{ post.author.user_name }}</a></span>
                           <span><i class="icon-comment2 mr-2"></i>{{ post.views }} Views</span>
                         </p>
-                        <p><a href="{{ url_for('show_post', post_id=post.blogpost_id) }}" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
+                        <p><a href="{{ url_for('show_post', post_id=post.blogpost_id) }}" class="btn-custom link-light">Read More <span class="ion-ios-arrow-forward"></span></a></p>
                       </div>
                     </div>
                   </div>

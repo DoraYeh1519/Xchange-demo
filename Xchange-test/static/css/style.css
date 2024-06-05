@@ -9232,7 +9232,13 @@ textarea.form-control {
 .link-dark {
   color: #000000; }
   .link-dark:hover {
-    color: #0028ff; 
+    color: #DAAA5E; 
+  }
+
+.link-light {
+  color: #DAAA5E; }
+  .link-light:hover {
+    color: #daaa5e7e; 
   }
 
 #ftco-loader {

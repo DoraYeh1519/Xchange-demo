@@ -36,7 +36,7 @@ login_manager.login_view = "login"
 
 # CONNECT TO DB
 username = "root" #Your username
-password = "" #Your password
+password = "EmeR2023" #Your password
 host = "localhost"
 port = 3306
 database = "dbms_project" #Your database name

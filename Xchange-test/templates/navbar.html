@@ -5,48 +5,44 @@
 			<h1 id="colorlib-logo" class="mb-3"><a href="{{ url_for('get_all_posts') }}">Xchange</a></h1>
 			<nav id="colorlib-main-menu" role="navigation">
 				<ul>
-					<li class="colorlib-active">
+					<li>
 						<a
 						class="nav-link px-lg-3 py-3 py-lg-4"
-						href="{{ url_for('get_all_posts') }}"
-						>Home</a>
+						href="{{ url_for('get_all_posts') }}">Home</a>
 					</li>
 					<li>
-						<a href="{{ url_for('call_get_all_posts') }}">Exchanging Information</a>
+						<a
+						class="nav-link px-lg-3 py-3 py-lg-4" 
+						href="{{ url_for('call_get_all_posts') }}"><i class="icon-subdirectory_arrow_right"> </i> Exchanging Information</a>
 					</li>
 
 					{% if not current_user.is_authenticated: %}
-					<li class="colorlib-active">
+					<li>
 						<a
 						class="nav-link px-lg-3 py-3 py-lg-4"
-						href="{{ url_for('login') }}"
-						>Login</a>
+						href="{{ url_for('login') }}">Login</a>
 					</li>
-					<li class="colorlib-active">
+					<li>
 						<a
 						class="nav-link px-lg-3 py-3 py-lg-4"
-						href="{{ url_for('register') }}"
-						>Register</a>
+						href="{{ url_for('register') }}">Register</a>
 					</li>
 					{% else: %}
-					<li class="colorlib-active">
+					<li>
 						<a
 						class="nav-link px-lg-3 py-3 py-lg-4"
-						href="{{ url_for('logout') }}"
-						>Log Out</a>
+						href="{{ url_for('logout') }}">Log Out</a>
 					</li>
-					<li class="colorlib-active">
+					<li>
 						<a
 						class="nav-link px-lg-3 py-3 py-lg-4"
-						href="{{ url_for('profile',user_id=current_user.get_id()) }}"
-						>Profile</a>
+						href="{{ url_for('profile',user_id=current_user.get_id()) }}">Profile</a>
 					</li>
 					{% endif %}
-					<li class="colorlib-active">
+					<li>
 						<a
 						class="nav-link px-lg-3 py-3 py-lg-4"
-						href="{{ url_for('about') }}"
-						>About</a>
+						href="{{ url_for('about') }}">About</a>
 					</li>
 					</ul>
 			</nav>
