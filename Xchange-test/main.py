@@ -457,27 +457,28 @@ def edit_post(post_id):
     
 
     if edit_form.validate_on_submit():
-        images_folder = edit_form.images_folder.data
-        if images_folder:
-            if not allowed_file(images_folder.filename):
-                flash("File does not have an approved extension.")
-                return redirect(url_for("edit_post", post_id=post_id))
 
-            folder_path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(images_folder.filename))
-            images_folder.save(folder_path)
-            extract_folder = os.path.join(app.config['UPLOAD_FOLDER'], 'extracted')
-            os.makedirs(extract_folder, exist_ok=True)
-            try:
-                with zipfile.ZipFile(folder_path, 'r') as zip_ref:
-                    zip_ref.extractall(extract_folder)
-            except zipfile.BadZipFile:
-                flash('Error: Uploaded file is not a valid zip file.')
-                os.remove(folder_path)
-                return redirect(url_for("edit_post", post_id=post_id))
-            image_files = os.listdir(extract_folder)
-        else:
-            extract_folder = None
-            image_files = []
+        # images_folder = edit_form.images_folder.data
+        # if images_folder:
+        #     if not allowed_file(images_folder.filename):
+        #         flash("File does not have an approved extension.")
+        #         return redirect(url_for("edit_post", post_id=post_id))
+
+        #     folder_path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(images_folder.filename))
+        #     images_folder.save(folder_path)
+        #     extract_folder = os.path.join(app.config['UPLOAD_FOLDER'], 'extracted')
+        #     os.makedirs(extract_folder, exist_ok=True)
+        #     try:
+        #         with zipfile.ZipFile(folder_path, 'r') as zip_ref:
+        #             zip_ref.extractall(extract_folder)
+        #     except zipfile.BadZipFile:
+        #         flash('Error: Uploaded file is not a valid zip file.')
+        #         os.remove(folder_path)
+        #         return redirect(url_for("edit_post", post_id=post_id))
+        #     image_files = os.listdir(extract_folder)
+        # else:
+        #     extract_folder = None
+        #     image_files = []
 
         post.title = edit_form.title.data
         post.img_url = edit_form.img_url.data
