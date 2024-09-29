@@ -1,5 +1,10 @@
 # Introduction  
-Project Repository: https://github.com/DoraYeh1519/Xchange-demo
+Project Repository: https://github.com/DoraYeh1519/Xchange-demo  
+Project File: https://drive.google.com/file/d/1gIHEWI439VHwFuOmHNzzGPNX-t2PKwRc/view?usp=sharing  
+Presentation Video: https://www.youtube.com/watch?v=l_jrHp56MwI
+
+## Project Preview
+
 
 ## Setup
 #### 1. Fork or Download this repository file
