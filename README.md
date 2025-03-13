@@ -1,5 +1,26 @@
 # Introduction  
-Project Repository: https://github.com/DoraYeh1519/Xchange-demo
+Project Repository: https://github.com/DoraYeh1519/Xchange-demo  
+Project File: https://drive.google.com/file/d/1gIHEWI439VHwFuOmHNzzGPNX-t2PKwRc/view?usp=sharing  
+Presentation Video: https://www.youtube.com/watch?v=l_jrHp56MwI
+
+## Project Preview
+**mainpage**
+![manepage](/image/mainpage.png)
+
+**blog post**
+![post](/image/post.png)
+
+**login page**
+![login](/image/login.png)
+
+**register page**
+![register](/image/register.png)
+
+**profile**
+![profile](/image/profile.png)
+
+**new post**
+![new_post](/image/newpost.png)
 
 ## Setup
 #### 1. Fork or Download this repository file
@@ -18,4 +39,3 @@ Project Repository: https://github.com/DoraYeh1519/Xchange-demo
     port = 3306
     database = "dbms_project" #Your database name
     connection_string = f"mysql+pymysql://{username}:{password}@{host}:{port}/{database}"
-```

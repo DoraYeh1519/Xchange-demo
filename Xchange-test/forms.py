@@ -15,7 +15,7 @@ class CreatePostForm(FlaskForm):
 
 class RegisterForm(FlaskForm):
     name = StringField("Your Name*", validators=[DataRequired()],render_kw={"placeholder": "Xiaoming Wang"})
-    id = StringField("Your Student ID *", validators=[DataRequired(),Length(min=9,max=9,message='invalid ID'),Regexp('^\d{9}$',message='incorrect format')],render_kw={"placeholder": "111306000"})
+    id = StringField("Your Student ID *", validators=[DataRequired(),Length(min=9,max=9,message='invalid ID'),Regexp(r'^\d{9}$',message='incorrect format')],render_kw={"placeholder": "111306000"})
     email = StringField("Your E-Mail Address *", validators=[DataRequired(),Email(message='invalid email')],render_kw={"placeholder": "xxx@mail.com"})
     password = PasswordField("Your Password (More than 8 characters) *", validators=[DataRequired(),Length(min=8 ,message='Too short')],render_kw={"placeholder": "8 more characters"})
     confirm_password = PasswordField("Confirm Password *", validators=[DataRequired()],render_kw={"placeholder": "repeat password"})
